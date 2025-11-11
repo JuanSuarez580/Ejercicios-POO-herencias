@@ -1,198 +1,203 @@
-from Modelo_vehiculo import Vehiculo
-from Modelo_auto import Auto
-from Modelo_camioneta import Camioneta
-from Modelo_camion import Camion
-from Modelo_base_datos import BaseDatosVehiculos
+from modelo_animal import Animal
+from modelo_caballo import Caballo
+from modelo_cocodrilo import Cocodrilo
+from modelo_pez import Pez
+from modelo_escarabajo import Escarabajo
+from modelo_pato import Pato
+from modelo_base_datos import BaseDatosAnimales
 
 def menu():
-    print("\n=== Sistema de Vehiculos ===")
-    print("1. Agregar auto")
-    print("2. Agregar camioneta")
-    print("3. Agregar camion")
-    print("4. Ver todos los vehiculos")
-    print("5. Ver estadisticas")
-    print("6. Buscar vehiculo por ID")
-    print("7. Operaciones con vehiculo")
-    print("8. Ejemplo completo")
+    print("\n=== Sistema de Animales ===")
+    print("1. Agregar caballo")
+    print("2. Agregar cocodrilo")
+    print("3. Agregar pez")
+    print("4. Agregar escarabajo")
+    print("5. Agregar pato")
+    print("6. Ver todos los animales")
+    print("7. Ver estadisticas")
+    print("8. Buscar animal por ID")
+    print("9. Operaciones con animal")
+    print("10. Ejemplo completo")
     print("0. Salir")
 
 def ejemplo_completo():
     print("\n=== EJEMPLO COMPLETO ===\n")
     
-    bd = BaseDatosVehiculos()
+    bd = BaseDatosAnimales()
     
-    print("--- Auto Deportivo ---")
-    auto1 = Auto("Z4", "Azul metalico", "2.0L Turbo", 2, 2, "Gasolina", "BMW")
-    auto1.arrancar()
-    auto1.acelerar(120)
-    auto1.sistema_direccion("derecha")
-    auto1.luces_auto("encender")
-    auto1.climatizacion("encender")
-    bd.agregar(auto1)
+    print("--- Caballo ---")
+    caballo = Caballo("Spirit", 5, "Pradera", "Herbivoro", "Grande", "Marron", "Mustang")
+    caballo.moverse()
+    caballo.comunicacion()
+    caballo.alimentarse()
+    caballo.reproduccion()
+    bd.agregar(caballo)
     
-    print("\n--- Camioneta Van ---")
-    camioneta1 = Camioneta("Hiace", "Blanco", "2.7L", 4, 12, "Gasolina", "Toyota")
-    camioneta1.arrancar()
-    camioneta1.acelerar(80)
-    camioneta1.sistema_direccion("izquierda")
-    camioneta1.cargar(600)
-    bd.agregar(camioneta1)
+    print("\n--- Cocodrilo ---")
+    cocodrilo = Cocodrilo("Nilo", 15, "Rio y pantano", "Carnivoro", "Muy grande", "Verde oscuro", "Cocodrilo del Nilo")
+    cocodrilo.moverse()
+    cocodrilo.comunicacion()
+    cocodrilo.alimentarse()
+    cocodrilo.adaptacion()
+    bd.agregar(cocodrilo)
     
-    print("\n--- Camion de Carga ---")
-    camion1 = Camion("Dyna", "Blanco", "4.0L Diesel", 2, 3, "Diesel", "Toyota")
-    camion1.arrancar()
-    camion1.acelerar(60)
-    camion1.cargar(4000)
-    camion1.verificar_carga()
-    bd.agregar(camion1)
+    print("\n--- Pez ---")
+    pez = Pez("Nemo", 2, "Arrecife", "Omnivoro", "Pequeño", "Naranja", "Pez payaso")
+    pez.moverse()
+    pez.comunicacion()
+    pez.alimentarse()
+    pez.interaccion_social()
+    bd.agregar(pez)
+    
+    print("\n--- Escarabajo ---")
+    escarabajo = Escarabajo("Hercules", 1, "Bosque", "Detritofago", "Mediano", "Negro", "Rinoceronte")
+    escarabajo.moverse()
+    escarabajo.comunicacion()
+    escarabajo.reproduccion()
+    bd.agregar(escarabajo)
+    
+    print("\n--- Pato ---")
+    pato = Pato("Donald", 3, "Lago", "Omnivoro", "Mediano", "Blanco y verde", "Pato real")
+    pato.moverse()
+    pato.comunicacion()
+    pato.alimentarse()
+    pato.adaptacion()
+    bd.agregar(pato)
     
     bd.listar()
     bd.estadisticas()
     
     print("\n=== FIN DEL EJEMPLO ===")
 
-def operaciones_con_vehiculo(bd):
-    print("\n--- Operaciones con Vehiculo ---")
-    id = int(input("ID del vehiculo: "))
-    vehiculo = bd.buscar(id)
+def operaciones_con_animal(bd):
+    print("\n--- Operaciones con Animal ---")
+    id = int(input("ID del animal: "))
+    animal = bd.buscar(id)
     
-    if vehiculo == None:
-        print("No se encontro el vehiculo")
+    if animal == None:
+        print("No se encontro el animal")
         return
     
-    print("\nVehiculo encontrado - ID:", id)
+    print("\nAnimal encontrado - ID:", id, "-", animal.nombre)
     print("\nQue deseas hacer?")
-    print("1. Arrancar")
-    print("2. Apagar")
-    print("3. Acelerar")
-    print("4. Frenar")
-    print("5. Sistema de direccion")
-    print("6. Climatizacion")
-    print("7. Luces")
-    print("8. Ventanas")
-    print("9. Espejos")
-    print("10. Ver tipo de seguridad")
-    print("11. Cargar (para camiones)")
-    print("12. Descargar (para camiones)")
-    print("13. Verificar carga (para camiones)")
-    print("14. Ver informacion completa")
+    print("1. Moverse")
+    print("2. Comunicacion")
+    print("3. Alimentarse")
+    print("4. Reproduccion")
+    print("5. Adaptacion")
+    print("6. Instintos")
+    print("7. Descanso")
+    print("8. Sueño")
+    print("9. Interaccion social")
+    print("10. Ver informacion completa")
     
     opcion = input("\nElige: ")
     
     if opcion == "1":
-        vehiculo.arrancar()
+        animal.moverse()
     elif opcion == "2":
-        vehiculo.apagar()
+        animal.comunicacion()
     elif opcion == "3":
-        cantidad = int(input("Cuanto acelerar (km/h): "))
-        vehiculo.acelerar(cantidad)
+        animal.alimentarse()
     elif opcion == "4":
-        cantidad = int(input("Cuanto frenar (km/h): "))
-        vehiculo.frenar(cantidad)
+        animal.reproduccion()
     elif opcion == "5":
-        direccion = input("Direccion (derecha/izquierda): ")
-        vehiculo.sistema_direccion(direccion)
+        animal.adaptacion()
     elif opcion == "6":
-        accion = input("Accion (encender/apagar): ")
-        vehiculo.climatizacion(accion)
+        animal.instintos()
     elif opcion == "7":
-        if hasattr(vehiculo, 'luces_auto'):
-            accion = input("Accion (encender/apagar): ")
-            vehiculo.luces_auto(accion)
-        else:
-            print("Este vehiculo no tiene ese sistema")
+        animal.descanso()
     elif opcion == "8":
-        ventana = input("Que ventana: ")
-        accion = input("Accion (subir/bajar): ")
-        vehiculo.sistema_ventanas(ventana, accion)
+        animal.sueño()
     elif opcion == "9":
-        accion = input("Accion (ajustar/plegar): ")
-        vehiculo.sistema_espejo(accion)
+        animal.interaccion_social()
     elif opcion == "10":
-        vehiculo.tipo_seguridad()
-    elif opcion == "11":
-        if hasattr(vehiculo, 'cargar'):
-            peso = int(input("Peso a cargar (kg): "))
-            vehiculo.cargar(peso)
-        else:
-            print("Este vehiculo no puede cargar")
-    elif opcion == "12":
-        if hasattr(vehiculo, 'descargar'):
-            peso = int(input("Peso a descargar (kg): "))
-            vehiculo.descargar(peso)
-        else:
-            print("Este vehiculo no tiene carga")
-    elif opcion == "13":
-        if hasattr(vehiculo, 'verificar_carga'):
-            vehiculo.verificar_carga()
-        else:
-            print("Este vehiculo no maneja carga")
-    elif opcion == "14":
-        vehiculo.mostrar_info()
+        animal.mostrar_info()
     else:
         print("Opcion no valida")
 
-bd = BaseDatosVehiculos()
+bd = BaseDatosAnimales()
 
 while True:
     menu()
     opcion = input("\nElige una opcion: ")
     
     if opcion == "1":
-        print("\n--- Agregar Auto ---")
-        marca = input("Marca: ")
-        modelo = input("Modelo: ")
+        print("\n--- Agregar Caballo ---")
+        nombre = input("Nombre: ")
+        edad = int(input("Edad: "))
+        habitat = input("Habitat: ")
+        tamaño = input("Tamaño: ")
         color = input("Color: ")
-        motor = input("Motor: ")
-        puertas = int(input("Numero de puertas: "))
-        pasajeros = int(input("Capacidad de pasajeros: "))
-        combustible = input("Tipo de combustible: ")
-        auto = Auto(modelo, color, motor, puertas, pasajeros, combustible, marca)
-        bd.agregar(auto)
+        raza = input("Raza: ")
+        caballo = Caballo(nombre, edad, habitat, "Herbivoro", tamaño, color, raza)
+        bd.agregar(caballo)
         
     elif opcion == "2":
-        print("\n--- Agregar Camioneta ---")
-        marca = input("Marca: ")
-        modelo = input("Modelo: ")
+        print("\n--- Agregar Cocodrilo ---")
+        nombre = input("Nombre: ")
+        edad = int(input("Edad: "))
+        habitat = input("Habitat: ")
+        tamaño = input("Tamaño: ")
         color = input("Color: ")
-        motor = input("Motor: ")
-        puertas = int(input("Numero de puertas: "))
-        pasajeros = int(input("Capacidad de pasajeros: "))
-        combustible = input("Tipo de combustible: ")
-        camioneta = Camioneta(modelo, color, motor, puertas, pasajeros, combustible, marca)
-        bd.agregar(camioneta)
+        especie = input("Especie: ")
+        cocodrilo = Cocodrilo(nombre, edad, habitat, "Carnivoro", tamaño, color, especie)
+        bd.agregar(cocodrilo)
         
     elif opcion == "3":
-        print("\n--- Agregar Camion ---")
-        marca = input("Marca: ")
-        modelo = input("Modelo: ")
+        print("\n--- Agregar Pez ---")
+        nombre = input("Nombre: ")
+        edad = int(input("Edad: "))
+        habitat = input("Habitat: ")
+        dieta = input("Dieta: ")
+        tamaño = input("Tamaño: ")
         color = input("Color: ")
-        motor = input("Motor: ")
-        puertas = int(input("Numero de puertas: "))
-        pasajeros = int(input("Capacidad de pasajeros: "))
-        combustible = input("Tipo de combustible: ")
-        camion = Camion(modelo, color, motor, puertas, pasajeros, combustible, marca)
-        bd.agregar(camion)
+        especie = input("Especie: ")
+        pez = Pez(nombre, edad, habitat, dieta, tamaño, color, especie)
+        bd.agregar(pez)
         
     elif opcion == "4":
-        bd.listar()
+        print("\n--- Agregar Escarabajo ---")
+        nombre = input("Nombre: ")
+        edad = int(input("Edad: "))
+        habitat = input("Habitat: ")
+        tamaño = input("Tamaño: ")
+        color = input("Color: ")
+        especie = input("Especie: ")
+        escarabajo = Escarabajo(nombre, edad, habitat, "Detritofago", tamaño, color, especie)
+        bd.agregar(escarabajo)
         
     elif opcion == "5":
-        bd.estadisticas()
+        print("\n--- Agregar Pato ---")
+        nombre = input("Nombre: ")
+        edad = int(input("Edad: "))
+        habitat = input("Habitat: ")
+        dieta = input("Dieta: ")
+        tamaño = input("Tamaño: ")
+        color = input("Color: ")
+        especie = input("Especie: ")
+        pato = Pato(nombre, edad, habitat, dieta, tamaño, color, especie)
+        bd.agregar(pato)
         
     elif opcion == "6":
-        id = int(input("ID del vehiculo: "))
-        vehiculo = bd.buscar(id)
-        if vehiculo != None:
-            print("\nVehiculo encontrado:")
-            vehiculo.mostrar_info()
-        else:
-            print("No se encontro el vehiculo")
-            
+        bd.listar()
+        
     elif opcion == "7":
-        operaciones_con_vehiculo(bd)
+        bd.estadisticas()
         
     elif opcion == "8":
+        id = int(input("ID del animal: "))
+        animal = bd.buscar(id)
+        if animal != None:
+            print("\nAnimal encontrado:")
+            animal.mostrar_info()
+        else:
+            print("No se encontro el animal")
+            
+    elif opcion == "9":
+        operaciones_con_animal(bd)
+        
+    elif opcion == "10":
         ejemplo_completo()
         
     elif opcion == "0":

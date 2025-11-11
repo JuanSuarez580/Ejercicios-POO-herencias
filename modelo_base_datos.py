@@ -1,56 +1,59 @@
-from modelo_botella import Botella
-from modelo_botella_plastica import BotellaPlastica
-from modelo_botella_vidrio import BotellaVidrio
+from modelo_animal import Animal
+from modelo_caballo import Caballo
+from modelo_cocodrilo import Cocodrilo
+from modelo_pez import Pez
+from modelo_escarabajo import Escarabajo
+from modelo_pato import Pato
 
-class BaseDatosBotellas:
+class BaseDatosAnimales:
     def __init__(self):
-        self.lista_botellas = []
+        self.lista_animales = []
         self.numero_id = 1
     
-    def agregar(self, botella):
-        botella.id = self.numero_id
-        self.lista_botellas.append(botella)
+    def agregar(self, animal):
+        animal.id = self.numero_id
+        self.lista_animales.append(animal)
         self.numero_id = self.numero_id + 1
-        print("Botella agregada con ID:", botella.id)
+        print("Animal agregado con ID:", animal.id)
     
     def buscar(self, id):
-        for botella in self.lista_botellas:
-            if botella.id == id:
-                return botella
+        for animal in self.lista_animales:
+            if animal.id == id:
+                return animal
         return None
     
-    def contar_vacias(self):
+    def contar_con_hambre(self):
         contador = 0
-        for botella in self.lista_botellas:
-            if botella.contenido == 0:
+        for animal in self.lista_animales:
+            if animal.hambre > 50:
                 contador = contador + 1
         return contador
     
-    def contar_llenas(self):
+    def contar_con_energia_baja(self):
         contador = 0
-        for botella in self.lista_botellas:
-            if botella.contenido >= botella.capacidad:
+        for animal in self.lista_animales:
+            if animal.energia < 30:
                 contador = contador + 1
         return contador
     
     def listar(self):
-        print("\n=== Lista de Botellas ===")
-        for botella in self.lista_botellas:
-            print("\nID:", botella.id)
-            print("Material:", botella.material)
-            print("Capacidad:", botella.capacidad, "ml")
-            print("Contenido:", botella.contenido, "ml")
-            if hasattr(botella, 'marca'):
-                print("Marca:", botella.marca)
-            if hasattr(botella, 'color'):
-                print("Color:", botella.color)
+        print("\n=== Lista de Animales ===")
+        for animal in self.lista_animales:
+            print("\nID:", animal.id)
+            print("Nombre:", animal.nombre)
+            print("Edad:", animal.edad, "años")
+            print("Habitat:", animal.habitat)
+            print("Dieta:", animal.dieta)
+            print("Energia:", animal.energia, "%")
+            if hasattr(animal, 'tipo'):
+                print("Tipo:", animal.tipo)
     
     def estadisticas(self):
-        total = len(self.lista_botellas)
-        vacias = self.contar_vacias()
-        llenas = self.contar_llenas()
+        total = len(self.lista_animales)
+        con_hambre = self.contar_con_hambre()
+        energia_baja = self.contar_con_energia_baja()
         
         print("\n=== Estadisticas ===")
-        print("Total de botellas:", total)
-        print("Botellas vacias:", vacias)
-        print("Botellas llenas:", llenas)
+        print("Total de animales:", total)
+        print("Animales con mucha hambre:", con_hambre)
+        print("Animales con energia baja:", energia_baja)
