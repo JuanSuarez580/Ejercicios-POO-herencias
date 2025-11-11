@@ -1,152 +1,198 @@
-from modelo_botella import Botella
-from modelo_botella_plastica import BotellaPlastica
-from modelo_botella_vidrio import BotellaVidrio
-from modelo_base_datos import BaseDatosBotellas
+from Modelo_vehiculo import Vehiculo
+from Modelo_auto import Auto
+from Modelo_camioneta import Camioneta
+from Modelo_camion import Camion
+from Modelo_base_datos import BaseDatosVehiculos
 
 def menu():
-    print("\n=== Sistema de Botellas ===")
-    print("1. Agregar botella plastica")
-    print("2. Agregar botella de vidrio")
-    print("3. Ver todas las botellas")
-    print("4. Ver estadisticas")
-    print("5. Buscar botella por ID")
-    print("6. Operaciones con botella")
-    print("7. Ejemplo completo")
+    print("\n=== Sistema de Vehiculos ===")
+    print("1. Agregar auto")
+    print("2. Agregar camioneta")
+    print("3. Agregar camion")
+    print("4. Ver todos los vehiculos")
+    print("5. Ver estadisticas")
+    print("6. Buscar vehiculo por ID")
+    print("7. Operaciones con vehiculo")
+    print("8. Ejemplo completo")
     print("0. Salir")
 
 def ejemplo_completo():
     print("\n=== EJEMPLO COMPLETO ===\n")
     
-    bd = BaseDatosBotellas()
+    bd = BaseDatosVehiculos()
     
-    print("--- Botella Plastica 1 ---")
-    botella1 = BotellaPlastica("Plastico", 500, "Cilindrica", "Azul", "Rosca", "Logo", "Agua Cristal")
-    botella1.cierre_hermetico("abrir")
-    botella1.contener_liquidos(450, "agua")
-    botella1.transporte("casa")
-    bd.agregar(botella1)
+    print("--- Auto Deportivo ---")
+    auto1 = Auto("Z4", "Azul metalico", "2.0L Turbo", 2, 2, "Gasolina", "BMW")
+    auto1.arrancar()
+    auto1.acelerar(120)
+    auto1.sistema_direccion("derecha")
+    auto1.luces_auto("encender")
+    auto1.climatizacion("encender")
+    bd.agregar(auto1)
     
-    print("\n--- Botella de Vidrio 1 ---")
-    botella2 = BotellaVidrio("Vidrio", 750, "Elegante", "Premium", "Corcho", "Grabado", "Verde")
-    botella2.cierre_hermetico("abrir")
-    botella2.contener_liquidos(700, "vino")
-    botella2.compatibilidad_bebidas_calientes_frias("vino", "fria")
-    bd.agregar(botella2)
+    print("\n--- Camioneta Van ---")
+    camioneta1 = Camioneta("Hiace", "Blanco", "2.7L", 4, 12, "Gasolina", "Toyota")
+    camioneta1.arrancar()
+    camioneta1.acelerar(80)
+    camioneta1.sistema_direccion("izquierda")
+    camioneta1.cargar(600)
+    bd.agregar(camioneta1)
     
-    print("\n--- Botella Plastica 2 ---")
-    botella3 = BotellaPlastica("Plastico", 1000, "Grande", "Transparente", "Deportiva", "Logo", "H2O")
-    botella3.cierre_hermetico("abrir")
-    botella3.contener_liquidos(1000, "agua")
-    botella3.verificar_transparencia()
-    bd.agregar(botella3)
-    
-    print("\n--- Botella de Vidrio 2 ---")
-    botella4 = BotellaVidrio("Vidrio", 500, "Redonda", "Simple", "Tapa", "Sin grabados", "Transparente")
-    botella4.cierre_hermetico("abrir")
-    botella4.contener_liquidos(400, "jugo")
-    bd.agregar(botella4)
-    
-    print("\n--- Reutilizacion ---")
-    botella1.reutilizacion()
-    botella2.reutilizacion()
-    botella1.reutilizacion()
+    print("\n--- Camion de Carga ---")
+    camion1 = Camion("Dyna", "Blanco", "4.0L Diesel", 2, 3, "Diesel", "Toyota")
+    camion1.arrancar()
+    camion1.acelerar(60)
+    camion1.cargar(4000)
+    camion1.verificar_carga()
+    bd.agregar(camion1)
     
     bd.listar()
     bd.estadisticas()
     
     print("\n=== FIN DEL EJEMPLO ===")
 
-def operaciones_con_botella(bd):
-    print("\n--- Operaciones con Botella ---")
-    id = int(input("ID de la botella: "))
-    botella = bd.buscar(id)
+def operaciones_con_vehiculo(bd):
+    print("\n--- Operaciones con Vehiculo ---")
+    id = int(input("ID del vehiculo: "))
+    vehiculo = bd.buscar(id)
     
-    if botella == None:
-        print("No se encontro la botella")
+    if vehiculo == None:
+        print("No se encontro el vehiculo")
         return
     
-    print("\nBotella encontrada - ID:", id)
+    print("\nVehiculo encontrado - ID:", id)
     print("\nQue deseas hacer?")
-    print("1. Abrir botella")
-    print("2. Cerrar botella")
-    print("3. Llenar botella")
-    print("4. Vaciar botella")
-    print("5. Transportar botella")
-    print("6. Reutilizar botella")
-    print("7. Ver informacion completa")
-    print("8. Verificar compatibilidad")
-    print("9. Ver contenido")
+    print("1. Arrancar")
+    print("2. Apagar")
+    print("3. Acelerar")
+    print("4. Frenar")
+    print("5. Sistema de direccion")
+    print("6. Climatizacion")
+    print("7. Luces")
+    print("8. Ventanas")
+    print("9. Espejos")
+    print("10. Ver tipo de seguridad")
+    print("11. Cargar (para camiones)")
+    print("12. Descargar (para camiones)")
+    print("13. Verificar carga (para camiones)")
+    print("14. Ver informacion completa")
     
     opcion = input("\nElige: ")
     
     if opcion == "1":
-        botella.abrir()
+        vehiculo.arrancar()
     elif opcion == "2":
-        botella.cerrar()
+        vehiculo.apagar()
     elif opcion == "3":
-        cantidad = int(input("Cantidad (ml): "))
-        liquido = input("Tipo de liquido: ")
-        botella.llenar(cantidad, liquido)
+        cantidad = int(input("Cuanto acelerar (km/h): "))
+        vehiculo.acelerar(cantidad)
     elif opcion == "4":
-        botella.vaciar()
+        cantidad = int(input("Cuanto frenar (km/h): "))
+        vehiculo.frenar(cantidad)
     elif opcion == "5":
-        lugar = input("Lugar de destino: ")
-        botella.transportar(lugar)
+        direccion = input("Direccion (derecha/izquierda): ")
+        vehiculo.sistema_direccion(direccion)
     elif opcion == "6":
-        botella.reutilizar()
+        accion = input("Accion (encender/apagar): ")
+        vehiculo.climatizacion(accion)
     elif opcion == "7":
-        botella.mostrar_info()
-    elif opcion == "8":
-        bebida = input("Bebida: ")
-        temp = input("Temperatura (caliente/fria): ")
-        botella.compatibilidad(bebida, temp)
-    elif opcion == "9":
-        if hasattr(botella, 'verificar_contenido'):
-            botella.verificar_contenido()
+        if hasattr(vehiculo, 'luces_auto'):
+            accion = input("Accion (encender/apagar): ")
+            vehiculo.luces_auto(accion)
         else:
-            print("Contenido actual:", botella.contenido, "ml")
+            print("Este vehiculo no tiene ese sistema")
+    elif opcion == "8":
+        ventana = input("Que ventana: ")
+        accion = input("Accion (subir/bajar): ")
+        vehiculo.sistema_ventanas(ventana, accion)
+    elif opcion == "9":
+        accion = input("Accion (ajustar/plegar): ")
+        vehiculo.sistema_espejo(accion)
+    elif opcion == "10":
+        vehiculo.tipo_seguridad()
+    elif opcion == "11":
+        if hasattr(vehiculo, 'cargar'):
+            peso = int(input("Peso a cargar (kg): "))
+            vehiculo.cargar(peso)
+        else:
+            print("Este vehiculo no puede cargar")
+    elif opcion == "12":
+        if hasattr(vehiculo, 'descargar'):
+            peso = int(input("Peso a descargar (kg): "))
+            vehiculo.descargar(peso)
+        else:
+            print("Este vehiculo no tiene carga")
+    elif opcion == "13":
+        if hasattr(vehiculo, 'verificar_carga'):
+            vehiculo.verificar_carga()
+        else:
+            print("Este vehiculo no maneja carga")
+    elif opcion == "14":
+        vehiculo.mostrar_info()
     else:
         print("Opcion no valida")
 
-bd = BaseDatosBotellas()
+bd = BaseDatosVehiculos()
 
 while True:
     menu()
     opcion = input("\nElige una opcion: ")
     
     if opcion == "1":
-        print("\n--- Agregar Botella Plastica ---")
+        print("\n--- Agregar Auto ---")
         marca = input("Marca: ")
-        capacidad = int(input("Capacidad (ml): "))
-        botella = BotellaPlastica("Plastico PET", capacidad, "Cilindrica", "Transparente", "Rosca", "Logo", marca)
-        bd.agregar(botella)
+        modelo = input("Modelo: ")
+        color = input("Color: ")
+        motor = input("Motor: ")
+        puertas = int(input("Numero de puertas: "))
+        pasajeros = int(input("Capacidad de pasajeros: "))
+        combustible = input("Tipo de combustible: ")
+        auto = Auto(modelo, color, motor, puertas, pasajeros, combustible, marca)
+        bd.agregar(auto)
         
     elif opcion == "2":
-        print("\n--- Agregar Botella de Vidrio ---")
+        print("\n--- Agregar Camioneta ---")
+        marca = input("Marca: ")
+        modelo = input("Modelo: ")
         color = input("Color: ")
-        capacidad = int(input("Capacidad (ml): "))
-        botella = BotellaVidrio("Vidrio", capacidad, "Elegante", "Premium", "Corcho", "Grabado", color)
-        bd.agregar(botella)
+        motor = input("Motor: ")
+        puertas = int(input("Numero de puertas: "))
+        pasajeros = int(input("Capacidad de pasajeros: "))
+        combustible = input("Tipo de combustible: ")
+        camioneta = Camioneta(modelo, color, motor, puertas, pasajeros, combustible, marca)
+        bd.agregar(camioneta)
         
     elif opcion == "3":
-        bd.listar()
+        print("\n--- Agregar Camion ---")
+        marca = input("Marca: ")
+        modelo = input("Modelo: ")
+        color = input("Color: ")
+        motor = input("Motor: ")
+        puertas = int(input("Numero de puertas: "))
+        pasajeros = int(input("Capacidad de pasajeros: "))
+        combustible = input("Tipo de combustible: ")
+        camion = Camion(modelo, color, motor, puertas, pasajeros, combustible, marca)
+        bd.agregar(camion)
         
     elif opcion == "4":
-        bd.estadisticas()
+        bd.listar()
         
     elif opcion == "5":
-        id = int(input("ID de la botella: "))
-        botella = bd.buscar(id)
-        if botella != None:
-            print("\nBotella encontrada:")
-            botella.mostrar_info()
-        else:
-            print("No se encontro la botella")
-            
-    elif opcion == "6":
-        operaciones_con_botella(bd)
+        bd.estadisticas()
         
+    elif opcion == "6":
+        id = int(input("ID del vehiculo: "))
+        vehiculo = bd.buscar(id)
+        if vehiculo != None:
+            print("\nVehiculo encontrado:")
+            vehiculo.mostrar_info()
+        else:
+            print("No se encontro el vehiculo")
+            
     elif opcion == "7":
+        operaciones_con_vehiculo(bd)
+        
+    elif opcion == "8":
         ejemplo_completo()
         
     elif opcion == "0":
